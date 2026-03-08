@@ -63,7 +63,10 @@ function App() {
             <HeroSection />
 
             <main className="relative z-10">
+              <ConceptSection />
               <TimelineSection />
+              <DemocraticSocialistSection />
+              <DemocraticSocialistVietnamSection />
               <NatureSection />
               <PrinciplesSection />
               <GrassrootsSection />
@@ -107,16 +110,13 @@ function HeroSection() {
       >
         <div
           className="h-full w-full bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "linear-gradient(to bottom, rgba(9,9,11,0.85), rgba(9,9,11,0.95)), url('https://source.unsplash.com/1600x900/?vietnam,community,city')",
-          }}
+          style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
         />
       </motion.div>
 
       <motion.div
         style={{ opacity: opacityOverlay }}
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-red-900/40 via-zinc-950/40 to-zinc-950"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-[#121212]"
       />
 
       <div className="relative z-10 flex h-full items-center justify-center px-4">
@@ -128,7 +128,7 @@ function HeroSection() {
             className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-zinc-900/70 px-4 py-1 text-xs sm:text-sm text-amber-100 backdrop-blur shadow-[0_0_25px_rgba(250,204,21,0.35)]"
           >
             <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span>Chuyên đề giáo dục chính trị</span>
+            <span>Chủ nghĩa xã hội khoa học</span>
           </motion.div>
 
           <motion.div
@@ -263,33 +263,73 @@ function SectionWrapper({
   );
 }
 
+function ConceptSection() {
+  return (
+    <SectionWrapper
+      id="khai-niem"
+      label="1. Khái niệm dân chủ"
+      icon={BookOpen}
+    >
+      <motion.div
+        variants={sectionContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(280px,380px)] gap-6 sm:gap-8 items-stretch"
+      >
+        <div className="rounded-2xl border border-amber-500/30 bg-zinc-900/80 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.7)] border-l-4 border-l-amber-500/60 flex flex-col justify-center">
+          <p className="text-sm sm:text-base leading-relaxed text-zinc-200 max-w-4xl">
+            Dân chủ xuất phát từ tiếng Hy Lạp cổ Demokratos, trong đó Demos nghĩa là nhân dân và Kratos nghĩa là quyền lực. Vì vậy, dân chủ được hiểu là quyền lực thuộc về nhân dân. Theo quan điểm của chủ nghĩa Mác - Lênin, dân chủ là sản phẩm của đấu tranh giai cấp và sự phát triển của xã hội, đồng thời là hình thức tổ chức nhà nước và nguyên tắc tổ chức đời sống xã hội, trong đó nhà nước phải phục vụ lợi ích của nhân dân.
+          </p>
+        </div>
+        <div className="relative rounded-2xl border border-amber-500/30 bg-zinc-900/90 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.8)] min-h-[220px] sm:min-h-[280px]">
+          <img
+            src="/images/khai-niem-dan-chu.jpg"
+            alt="Khái niệm dân chủ"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-4">
+            <p className="text-xs uppercase tracking-wider text-amber-300/90">Demokratos — Quyền lực nhân dân</p>
+          </div>
+        </div>
+      </motion.div>
+    </SectionWrapper>
+  );
+}
+
 function TimelineSection() {
   const milestones = [
     {
       title: 'Dân chủ nguyên thủy.',
       description:
         'Xuất hiện trong chế độ cộng sản nguyên thủy. Mọi người cùng tham gia quyết định các công việc chung thông qua "Đại hội nhân dân" bằng hình thức biểu quyết.',
+      image: '/images/gd-nguyenthuy.jpg',
     },
     {
       title: 'Dân chủ chủ nô.',
       description:
         'Bị giới hạn nghiêm ngặt. Chỉ chủ nô và công dân tự do mới có quyền, còn đa số là nô lệ thì không có bất kỳ quyền dân chủ nào.',
+      image: '/images/gd-chuno.jpg',
     },
     {
       title: 'Dân chủ phong kiến.',
       description:
         'Dân chủ bị thủ tiêu. Quyền lực tập trung tuyệt đối vào tay nhà vua và giai cấp quý tộc, mang tính độc tài chuyên chế.',
+      image: '/images/gd-phongkien.jpg',
     },
     {
       title: 'Dân chủ tư sản.',
       description:
         'Một bước tiến lớn, đề cao tự do, bình đẳng và quyền công dân. Tuy nhiên, thực chất quyền lực và tư liệu sản xuất chủ yếu vẫn thuộc về giai cấp tư sản.',
+      image: '/images/gd-tusan.jpg',
     },
     {
       title: 'Dân chủ xã hội chủ nghĩa.',
       description:
         'Hình thành rõ nét sau Cách mạng Tháng Mười Nga (1917). Mục tiêu là thực hiện quyền lực thực sự của nhân dân, mở rộng quyền làm chủ cho đại đa số nhân dân lao động.',
       isHighlight: true,
+      image: '/images/gd-xhcn.jpg',
     },
   ];
 
@@ -304,11 +344,10 @@ function TimelineSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        className="space-y-6"
+        className="rounded-2xl border border-amber-500/30 bg-zinc-900/80 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.7)] border-l-4 border-l-amber-500/60"
       >
-        <p className="max-w-2xl text-sm sm:text-base text-zinc-300 leading-relaxed">
-          Các hình thức dân chủ phát triển qua nhiều giai đoạn lịch sử khác
-          nhau, gắn với sự biến đổi của chế độ xã hội và giai cấp cầm quyền.
+        <p className="text-sm sm:text-base text-zinc-200 leading-relaxed max-w-4xl">
+          Trong lịch sử, dân chủ phát triển qua nhiều hình thức như dân chủ nguyên thủy, dân chủ chủ nô, dân chủ phong kiến, dân chủ tư sản, và đến dân chủ xã hội chủ nghĩa. Dân chủ xã hội chủ nghĩa được hình thành rõ nét sau Cách mạng Tháng Mười Nga năm 1917, với mục tiêu mở rộng quyền làm chủ của nhân dân lao động. Ở Việt Nam, tư tưởng dân chủ được thể hiện qua quan điểm "dân là chủ, dân làm chủ" của Hồ Chí Minh và chủ trương xây dựng nền dân chủ xã hội chủ nghĩa, mở rộng quyền làm chủ của nhân dân trong mọi lĩnh vực của đời sống xã hội. Các hình thức dân chủ phát triển qua nhiều giai đoạn lịch sử khác nhau, gắn với sự biến đổi của chế độ xã hội và giai cấp cầm quyền.
         </p>
       </motion.div>
 
@@ -385,7 +424,7 @@ function TimelineCard({
   index,
   align,
 }: {
-  item: { title: string; description: string; isHighlight?: boolean };
+  item: { title: string; description: string; isHighlight?: boolean; image?: string };
   index: number;
   align: 'left' | 'right';
 }) {
@@ -395,10 +434,20 @@ function TimelineCard({
     <motion.div
       whileHover={{ scale: 1.02, y: -4 }}
       transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-      className={`max-w-md rounded-xl border border-red-500/40 bg-gradient-to-br from-zinc-900/90 via-zinc-900/80 to-red-950/70 backdrop-blur-md px-4 py-4 sm:px-5 sm:py-5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] ${
+      className={`max-w-md rounded-xl border border-red-500/40 bg-gradient-to-br from-zinc-900/90 via-zinc-900/80 to-red-950/70 backdrop-blur-md overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)] ${
         align === 'left' ? 'sm:text-left' : 'sm:text-right'
       }`}
     >
+      {item.image && (
+        <div className="h-40 w-full overflow-hidden rounded-t-xl">
+          <img
+            src={item.image}
+            alt=""
+            className="h-full w-full object-cover"
+          />
+        </div>
+      )}
+      <div className="px-4 py-4 sm:px-5 sm:py-5">
       <div
         className={`mb-2 flex items-center gap-2 text-xs text-amber-300 ${
           align === 'left' ? 'sm:justify-start' : 'sm:justify-end'
@@ -423,7 +472,198 @@ function TimelineCard({
           <span>Mốc phát triển mới</span>
         </p>
       )}
+      </div>
     </motion.div>
+  );
+}
+
+function DemocraticSocialistSection() {
+  const [selectedIndex, setSelectedIndex] = React.useState<number | null>(0);
+  const milestones = [
+    { year: '1871', title: 'Công xã Paris', desc: 'Hình thức phôi thai của dân chủ vô sản.', image: '/images/cong-xa-paris.jpg' },
+    { year: '1917', title: 'Cách mạng Tháng Mười Nga', desc: 'Nhà nước xã hội chủ nghĩa đầu tiên.', image: '/images/cach-mang-thang-muoi.jpg' },
+  ];
+  const selected = selectedIndex !== null ? milestones[selectedIndex] : null;
+  return (
+    <SectionWrapper
+      id="dan-chu-xhcn"
+      label="Dân chủ xã hội chủ nghĩa"
+      icon={Scale}
+    >
+      <div className="grid gap-6 lg:grid-cols-[1fr_1fr_1fr] items-stretch">
+        <motion.div
+          variants={sectionContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
+        >
+          <h3 className="text-lg font-semibold text-amber-200 mb-3">Theo Mác – Lênin</h3>
+          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+            Đấu tranh cho dân chủ là quá trình lâu dài. Dân chủ tư sản chưa phải hình thức hoàn thiện → Xuất hiện dân chủ vô sản (dân chủ xã hội chủ nghĩa).
+          </p>
+          <div className="mt-6 rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4">
+            <p className="text-xs uppercase tracking-wider text-emerald-300 mb-1">Mục tiêu</p>
+            <p className="text-sm text-zinc-200">Mở rộng dân chủ; Nâng cao quyền làm chủ của nhân dân lao động.</p>
+          </div>
+        </motion.div>
+        <motion.div
+          variants={sectionContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="space-y-3"
+        >
+          <h3 className="text-lg font-semibold text-amber-200 mb-3">Các mốc lịch sử — nhấn để xem ảnh</h3>
+          {milestones.map((m, i) => (
+            <motion.button
+              key={m.year}
+              type="button"
+              onClick={() => setSelectedIndex(i)}
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className={`w-full text-left flex gap-4 rounded-xl border p-4 transition-all duration-300 ${
+                selectedIndex === i
+                  ? 'border-amber-400 bg-amber-500/20 shadow-[0_0_20px_rgba(250,204,21,0.25)]'
+                  : 'border-amber-500/30 bg-amber-950/20 hover:border-amber-400/60 hover:bg-amber-950/40'
+              }`}
+            >
+              <span className="flex-shrink-0 text-lg font-bold text-amber-400">{m.year}</span>
+              <div className="min-w-0">
+                <p className="font-medium text-zinc-100">{m.title}</p>
+                <p className="text-sm text-zinc-400 mt-0.5">{m.desc}</p>
+              </div>
+            </motion.button>
+          ))}
+        </motion.div>
+        <motion.div
+          variants={sectionContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="rounded-2xl border border-zinc-800/50 bg-zinc-900/90 overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] min-h-[260px] flex flex-col"
+        >
+          <div className="flex-1 relative min-h-[220px] sm:min-h-[280px]">
+            <AnimatePresence mode="wait">
+              {selected ? (
+                <motion.div
+                  key={selected.year}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.25 }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={selected.image}
+                    alt={selected.title}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p className="text-xs uppercase tracking-wider text-amber-300/90">{selected.year}</p>
+                    <p className="font-semibold text-white mt-0.5">{selected.title}</p>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 flex items-center justify-center bg-zinc-900/80"
+                >
+                  <p className="text-sm text-zinc-500">Chọn mốc lịch sử để xem ảnh</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
+      </div>
+    </SectionWrapper>
+  );
+}
+
+function DemocraticSocialistVietnamSection() {
+  const [imgError, setImgError] = React.useState(false);
+  const steps = [
+    { year: '1945', title: 'Thành lập Nhà nước Việt Nam Dân chủ Cộng hòa', desc: 'Quyền lực thuộc về nhân dân.' },
+    { year: '1976', title: 'Thành lập Cộng hòa xã hội chủ nghĩa Việt Nam', desc: '' },
+    { year: '1986', title: 'Đại hội VI', desc: 'Bắt đầu thời kỳ đổi mới, phát huy dân chủ, mở rộng quyền làm chủ của nhân dân.' },
+  ];
+  return (
+    <SectionWrapper
+      id="dan-chu-xhcn-vn"
+      label="Dân chủ xã hội chủ nghĩa ở Việt Nam"
+      icon={Landmark}
+    >
+      <div className="space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-6 sm:gap-8 items-start">
+          <motion.div
+            initial={{ opacity: 0, x: -12 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.7)]"
+          >
+            <h3 className="text-lg font-semibold text-amber-200 mb-5">Quá trình hình thành</h3>
+            <div className="relative pl-6 border-l-2 border-amber-500/50 space-y-6">
+              {steps.map((s, i) => (
+                <motion.div
+                  key={s.year}
+                  initial={{ opacity: 0, x: -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="relative"
+                >
+                  <span className="absolute -left-6 top-0 w-3 h-3 rounded-full bg-amber-400 border-2 border-zinc-900 shadow-[0_0_8px_rgba(250,204,21,0.5)]" />
+                  <span className="text-sm font-bold text-amber-400">{s.year}</span>
+                  <p className="font-medium text-zinc-100 mt-0.5">{s.title}</p>
+                  {s.desc && <p className="text-sm text-zinc-400 mt-0.5">{s.desc}</p>}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative rounded-2xl border border-amber-500/40 bg-zinc-900 overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] min-h-[280px] flex flex-col items-center justify-center p-4"
+          >
+            {!imgError ? (
+              <>
+                <img
+                  src="/images/dan-chu-xhcn-viet-nam.png"
+                  alt="Dân chủ xã hội chủ nghĩa ở Việt Nam"
+                  className="w-full h-auto max-h-[640px] object-contain"
+                  onError={() => setImgError(true)}
+                />
+                <div className="mt-3 text-center">
+                  <p className="text-xs uppercase tracking-wider text-amber-300/90">Việt Nam</p>
+                  <p className="font-semibold text-white mt-0.5">Dân chủ xã hội chủ nghĩa</p>
+                </div>
+              </>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-12 px-6 text-center">
+                <Landmark className="h-16 w-16 text-amber-500/50 mb-3" />
+                <p className="text-sm font-medium text-amber-200/90">Dân chủ xã hội chủ nghĩa ở Việt Nam</p>
+                <p className="text-xs text-zinc-500 mt-1">Đặt ảnh tại public/images/dan-chu-xhcn-viet-nam.png</p>
+              </div>
+            )}
+          </motion.div>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="rounded-2xl border border-amber-400/40 bg-gradient-to-br from-amber-950/40 to-zinc-900/80 p-6 sm:p-8 text-center shadow-[0_20px_60px_rgba(250,204,21,0.15)]"
+        >
+          <p className="text-xs uppercase tracking-wider text-amber-300 mb-2">Mục tiêu phát triển</p>
+          <p className="text-xl sm:text-2xl font-bold text-amber-100">Dân giàu – nước mạnh – dân chủ – công bằng – văn minh</p>
+        </motion.div>
+      </div>
+    </SectionWrapper>
   );
 }
 
