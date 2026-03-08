@@ -4,6 +4,7 @@ import {
   AlertTriangle,
   BookOpen,
   Bot,
+  BrainCircuit,
   CheckCircle2,
   ChevronDown,
   Clock,
@@ -20,6 +21,8 @@ import {
   ScrollText,
   ShieldCheck,
   Sparkles,
+  Target,
+  Timer,
   Users,
 } from 'lucide-react';
 
@@ -28,7 +31,7 @@ const sectionContainer = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
@@ -40,7 +43,7 @@ const cardVariant = {
     transition: {
       duration: 0.6,
       delay: i * 0.08,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   }),
 };
@@ -51,7 +54,7 @@ function App() {
   const [view, setView] = React.useState<View>('home');
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50 font-sans">
+    <div className="min-h-screen bg-zinc-950 text-gray-300 font-sans antialiased">
       <SiteNav currentView={view} onChangeView={setView} />
 
       <div className="pt-16">
@@ -218,11 +221,13 @@ function SectionWrapper({
   label,
   icon: Icon,
   children,
+  contentMaxWidth = 'max-w-6xl',
 }: {
   id: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   children: React.ReactNode;
+  contentMaxWidth?: string;
 }) {
   return (
     <section
@@ -235,18 +240,20 @@ function SectionWrapper({
         <div className="absolute inset-y-0 -right-40 w-64 bg-[radial-gradient(circle_at_bottom,_rgba(248,250,252,0.08),_transparent_60%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-10 px-4 sm:px-6 lg:px-8">
+      <div className={`relative z-10 mx-auto flex flex-col gap-10 px-4 sm:px-6 lg:px-8 ${contentMaxWidth}`}>
         <motion.div
           variants={sectionContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="flex items-center gap-3 text-xs sm:text-sm text-amber-300"
+          className="flex items-center gap-3 mb-8"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-900/60 border border-red-500/40 shadow-[0_0_25px_rgba(127,29,29,0.55)]">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-red-900/60 border border-red-500/40 shadow-[0_0_25px_rgba(127,29,29,0.55)]">
             <Icon className="h-4 w-4" />
           </div>
-          <span className="uppercase tracking-[0.25em]">{label}</span>
+          <span className="text-3xl md:text-4xl font-extrabold tracking-wider uppercase text-yellow-500">
+            {label}
+          </span>
           <div className="h-px flex-1 bg-gradient-to-r from-red-500/50 via-amber-300/40 to-transparent" />
         </motion.div>
 
@@ -299,10 +306,7 @@ function TimelineSection() {
         viewport={{ once: true, amount: 0.3 }}
         className="space-y-6"
       >
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
-          Lịch sử phát triển
-        </h2>
-        <p className="max-w-2xl text-sm sm:text-base text-zinc-300">
+        <p className="max-w-2xl text-sm sm:text-base text-zinc-300 leading-relaxed">
           Các hình thức dân chủ phát triển qua nhiều giai đoạn lịch sử khác
           nhau, gắn với sự biến đổi của chế độ xã hội và giai cấp cầm quyền.
         </p>
@@ -391,7 +395,7 @@ function TimelineCard({
     <motion.div
       whileHover={{ scale: 1.02, y: -4 }}
       transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-      className={`max-w-md rounded-xl border border-zinc-800 bg-zinc-900/90 px-4 py-4 sm:px-5 sm:py-5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] ${
+      className={`max-w-md rounded-xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md px-4 py-4 sm:px-5 sm:py-5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] ${
         align === 'left' ? 'sm:text-left' : 'sm:text-right'
       }`}
     >
@@ -457,10 +461,7 @@ function NatureSection() {
         viewport={{ once: true, amount: 0.3 }}
         className="space-y-6"
       >
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
-          Bản chất dân chủ xã hội chủ nghĩa
-        </h2>
-        <p className="max-w-2xl text-sm sm:text-base text-zinc-300">
+        <p className="max-w-2xl text-sm sm:text-base text-zinc-300 leading-relaxed">
           Dân chủ xã hội chủ nghĩa thể hiện quyền làm chủ thực chất của nhân dân
           lao động, dưới sự lãnh đạo của Đảng và quản lý của Nhà nước pháp
           quyền xã hội chủ nghĩa.
@@ -487,7 +488,7 @@ function NatureSection() {
               stiffness: 220,
               damping: 20,
             }}
-            className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-[0_24px_80px_rgba(0,0,0,0.85)]"
+            className="group relative overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md shadow-[0_24px_80px_rgba(0,0,0,0.85)]"
           >
             <div className="pointer-events-none absolute inset-0 opacity-40">
               <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-amber-400/20 blur-3xl" />
@@ -538,15 +539,12 @@ function PrinciplesSection() {
           viewport={{ once: true, amount: 0.3 }}
           className="space-y-6"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
-            Nguyên tắc hệ thống chính trị
-          </h2>
-          <p className="text-sm sm:text-base text-zinc-300 max-w-xl">
+          <p className="text-sm sm:text-base text-zinc-300 max-w-xl leading-relaxed">
             Nguyên tắc vận hành của hệ thống chính trị xã hội chủ nghĩa được
             khái quát bằng mối quan hệ biện chứng:
           </p>
 
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-900 px-4 py-4 sm:px-5 sm:py-5 space-y-3 shadow-sm">
+          <div className="rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md px-4 py-4 sm:px-5 sm:py-5 space-y-3 shadow-sm">
             <p className="text-sm sm:text-[0.95rem] text-amber-200">
               Đảng lãnh đạo – Nhà nước quản lý – Nhân dân làm chủ
             </p>
@@ -561,10 +559,10 @@ function PrinciplesSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6 }}
-            className="relative max-w-xl overflow-hidden rounded-2xl border border-amber-300/40 bg-gradient-to-br from-amber-400/20 via-amber-300/10 to-red-500/20 px-5 py-4 sm:px-6 sm:py-5 text-sm sm:text-[0.95rem] text-zinc-950 shadow-[0_18px_60px_rgba(0,0,0,0.7)]"
+            className="relative max-w-xl overflow-hidden rounded-2xl border border-amber-300/40 bg-gradient-to-br from-amber-400/20 via-amber-300/10 to-red-500/20 px-5 py-4 sm:px-6 sm:py-5 text-sm sm:text-[0.95rem] text-amber-50 shadow-[0_18px_60px_rgba(0,0,0,0.7)]"
           >
             <div className="pointer-events-none absolute -left-6 -top-8 h-16 w-16 rounded-full bg-amber-200/60 blur-2xl" />
-            <p className="relative font-medium">
+            <p className="relative font-medium text-lg">
               "Dân biết – dân bàn – dân làm – dân kiểm tra – dân giám sát – dân
               thụ hưởng".
             </p>
@@ -576,13 +574,11 @@ function PrinciplesSection() {
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto flex h-[260px] w-full max-w-md items-center justify-center"
+          className="relative mx-auto flex h-[260px] w-full max-w-md items-center justify-center rounded-[2rem] bg-orange-950/40 border border-orange-900/50 shadow-xl"
         >
-          <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-red-100 via-amber-50 to-slate-50 border border-slate-200 shadow-xl" />
-
           <svg
             viewBox="0 0 320 260"
-            className="relative h-[220px] w-[280px] text-slate-900"
+            className="relative h-[240px] w-[320px] text-white transform scale-110 md:scale-125"
           >
             <motion.line
               x1="160"
@@ -670,7 +666,7 @@ function NodeCircle({
       />
       <foreignObject x={cx - 16} y={cy - 16} width="32" height="32">
         <motion.div
-          className="flex h-8 w-8 items-center justify-center text-zinc-950"
+          className="flex h-8 w-8 items-center justify-center text-white"
           initial={{ scale: 0, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true, amount: 0.8 }}
@@ -686,7 +682,7 @@ function NodeCircle({
         height="40"
       >
         <motion.div
-          className="text-center text-[0.65rem] text-zinc-200"
+          className="text-center text-[0.65rem] text-amber-50"
           initial={{ opacity: 0, y: 6 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.8 }}
@@ -700,32 +696,29 @@ function NodeCircle({
 }
 
 function GrassrootsSection() {
+  // HƯỚNG DẪN: Bỏ ảnh vào thư mục public/images/ và cập nhật tên file ở đây.
   const items = [
     {
       title:
         'Công khai thông tin: Kế hoạch, ngân sách, quy hoạch, dự án.',
-      image:
-        'https://source.unsplash.com/900x900/?documents,meeting,planning,city',
+      image: '/images/cong-khai-thong-tin.jpg',
       icon: Eye,
     },
     {
       title: 'Nhân dân quyết định: Họp dân, đóng góp ý kiến.',
-      image:
-        'https://source.unsplash.com/900x900/?community,discussion,people,decision',
+      image: '/images/nhan-dan-quyet-dinh.jpg',
       icon: Users,
     },
     {
       title:
         'Nhân dân thực hiện: Xây dựng công trình, hoạt động xã hội.',
-      image:
-        'https://source.unsplash.com/900x900/?volunteer,construction,community',
+      image: '/images/nhan-dan-thuc-hien.jpg',
       icon: CheckCircle2,
     },
     {
       title:
         'Nhân dân giám sát: Qua Mặt trận Tổ quốc, Công đoàn, Đoàn Thanh niên, Hội Phụ nữ.',
-      image:
-        'https://source.unsplash.com/900x900/?protest,oversight,city,people',
+      image: '/images/nhan-dan-giam-sat.jpg',
       icon: Eye,
     },
   ];
@@ -735,6 +728,7 @@ function GrassrootsSection() {
       id="thuc-tien"
       label="Thực tiễn dân chủ cơ sở"
       icon={Users}
+      contentMaxWidth="max-w-5xl"
     >
       <motion.div
         variants={sectionContainer}
@@ -743,53 +737,47 @@ function GrassrootsSection() {
         viewport={{ once: true, amount: 0.3 }}
         className="space-y-6"
       >
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
-          Thực tiễn dân chủ cơ sở
-        </h2>
-        <p className="max-w-2xl text-sm sm:text-base text-zinc-300">
+        <p className="max-w-2xl text-sm sm:text-base text-zinc-300 leading-relaxed">
           Dân chủ được cụ thể hóa tại cơ sở thông qua các cơ chế công khai, tham
           gia quyết định, tổ chức thực hiện và giám sát của nhân dân.
         </p>
       </motion.div>
 
-      <div className="mt-6 columns-1 gap-4 sm:columns-2 lg:columns-3 [column-fill:_balance] space-y-4">
-        {items.map((item, index) => (
-          <motion.article
-            key={item.title}
-            custom={index}
-            variants={cardVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.4 }}
-            whileHover={{ y: -6 }}
-            className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-[0_20px_70px_rgba(0,0,0,0.8)] break-inside-avoid"
-          >
-            <div className="group relative aspect-[4/3] overflow-hidden">
-              <motion.div
-                className="h-full w-full bg-cover bg-center"
-                style={{ backgroundImage: `url('${item.image}')` }}
-                whileHover={{ scale: 1.08 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+      <div className="mt-6 w-full max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+          {items.map((item, index) => (
+            <motion.article
+              key={item.title}
+              custom={index}
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              whileHover={{ y: -6 }}
+              className="group relative overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md shadow-[0_20px_70px_rgba(0,0,0,0.8)] w-full h-full"
+            >
+              <div className="relative w-full h-72 overflow-hidden">
+                <motion.div
+                  className="h-full w-full bg-cover bg-center"
+                  style={{ backgroundImage: `url('${item.image}')` }}
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-              <motion.div
-                className="absolute inset-x-0 bottom-0 space-y-2 px-4 pb-4 pt-10"
-                initial={{ y: 40, opacity: 0 }}
-                whileHover={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-              >
-                <div className="inline-flex items-center gap-2 rounded-full bg-zinc-950/80 px-3 py-1 text-[0.7rem] text-zinc-100">
-                  <item.icon className="h-3.5 w-3.5 text-amber-300" />
-                  <span>Dân chủ cơ sở</span>
+                <div className="absolute inset-x-0 bottom-0 space-y-2 px-4 pb-4 pt-10 transition-all duration-300 ease-out translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-zinc-950/80 px-3 py-1 text-[0.7rem] text-zinc-100">
+                    <item.icon className="h-3.5 w-3.5 text-amber-300" />
+                    <span>Dân chủ cơ sở</span>
+                  </div>
+                  <p className="text-sm leading-snug text-zinc-50">
+                    {item.title}
+                  </p>
                 </div>
-                <p className="text-sm leading-snug text-zinc-50">
-                  {item.title}
-                </p>
-              </motion.div>
-            </div>
-          </motion.article>
-        ))}
+              </div>
+            </motion.article>
+          ))}
+        </div>
       </div>
     </SectionWrapper>
   );
@@ -811,8 +799,6 @@ function EvaluationSection() {
     'Nâng cao nhận thức người dân.',
   ];
 
-  const [activeStep, setActiveStep] = React.useState(0);
-
   return (
     <SectionWrapper
       id="danh-gia-giai-phap"
@@ -827,10 +813,7 @@ function EvaluationSection() {
           viewport={{ once: true, amount: 0.3 }}
           className="space-y-6"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white">
-            Đánh giá thực tiễn
-          </h2>
-          <p className="text-sm sm:text-base text-zinc-300">
+          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
             Dân chủ xã hội chủ nghĩa đạt được nhiều kết quả quan trọng song vẫn
             còn những hạn chế khách quan và chủ quan.
           </p>
@@ -890,7 +873,7 @@ function EvaluationSection() {
           <h3 className="text-xl sm:text-2xl font-semibold text-white">
             Giải pháp từng bước
           </h3>
-          <p className="text-sm sm:text-base text-zinc-300">
+          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
             Lộ trình củng cố dân chủ đòi hỏi cải cách thể chế, đổi mới phương
             thức lãnh đạo và nâng cao năng lực chủ thể tham gia.
           </p>
@@ -899,55 +882,25 @@ function EvaluationSection() {
             <div className="pointer-events-none absolute left-5 top-4 bottom-4 border-l border-dashed border-amber-300/60" />
 
             <div className="space-y-4">
-              {steps.map((step, index) => {
-                const isActive = index === activeStep;
-                return (
-                  <motion.button
-                    type="button"
-                    key={step}
-                    onClick={() => setActiveStep(index)}
-                    whileHover={{ scale: 1.01, x: 4 }}
-                    whileTap={{ scale: 0.99 }}
-                    className={`relative flex w-full items-start gap-4 rounded-2xl border px-4 py-3 sm:px-5 sm:py-4 text-left transition-colors ${
-                      isActive
-                        ? 'border-amber-300 bg-amber-300/15'
-                        : 'border-zinc-800 bg-zinc-900/80 hover:border-amber-300/70'
-                    }`}
-                  >
-                    <div className="relative mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center">
-                      <div
-                        className={`h-6 w-6 rounded-full border-2 ${
-                          isActive
-                            ? 'border-amber-300 bg-amber-300/20'
-                            : 'border-zinc-600 bg-zinc-900'
-                        }`}
-                      />
-                      <motion.div
-                        className="absolute h-2 w-2 rounded-full bg-amber-300"
-                        animate={
-                          isActive
-                            ? { scale: [1, 1.4, 1], opacity: [1, 0.5, 1] }
-                            : { scale: 1, opacity: 0.6 }
-                        }
-                        transition={{
-                          repeat: isActive ? Infinity : 0,
-                          duration: 1.4,
-                          ease: 'easeInOut',
-                        }}
-                      />
-                    </div>
+              {steps.map((step, index) => (
+                <div
+                  key={step}
+                  className="group relative flex w-full items-start gap-4 rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md px-4 py-3 sm:px-5 sm:py-4 text-left transition-all duration-300 hover:border-yellow-500 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)]"
+                >
+                  <div className="relative mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center">
+                    <div className="h-6 w-6 rounded-full border-2 border-zinc-600 bg-zinc-900 group-hover:border-amber-300 group-hover:bg-amber-300/20 transition-colors" />
+                  </div>
 
-                    <div className="space-y-1">
-                      <p className="text-xs uppercase tracking-[0.18em] text-amber-200">
-                        Bước {index + 1}
-                      </p>
-                      <p className="text-sm sm:text-[0.95rem] text-zinc-50">
-                        {step}
-                      </p>
-                    </div>
-                  </motion.button>
-                );
-              })}
+                  <div className="space-y-1">
+                    <p className="text-xs uppercase tracking-[0.18em] text-amber-200">
+                      Bước {index + 1}
+                    </p>
+                    <p className="text-sm sm:text-[0.95rem] text-zinc-50">
+                      {step}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>
@@ -961,168 +914,25 @@ type QuizQuestion = {
   question: string;
   options: string[];
   answer: string;
+  explanation: string;
 };
 
 const quizQuestions: QuizQuestion[] = [
-  {
-    id: 1,
-    question: 'Thuật ngữ dân chủ (Demokratos) xuất phát từ tiếng nước nào?',
-    options: ['La Mã cổ đại', 'Hy Lạp cổ đại', 'Pháp', 'Anh'],
-    answer: 'Hy Lạp cổ đại',
-  },
-  {
-    id: 2,
-    question:
-      'Theo quan điểm của chủ nghĩa Mác - Lênin, dân chủ trước hết là:',
-    options: [
-      'Quyền lực thuộc về nhân dân',
-      'Quyền lực của giai cấp thống trị',
-      'Quyền tự do tuyệt đối',
-      'Quyền lực của bộ máy nhà nước',
-    ],
-    answer: 'Quyền lực thuộc về nhân dân',
-  },
-  {
-    id: 3,
-    question: 'Hình thức manh nha của dân chủ xuất hiện trong chế độ nào?',
-    options: [
-      'Chế độ phong kiến',
-      'Chế độ chủ nô',
-      'Chế độ cộng sản nguyên thủy',
-      'Chế độ tư bản',
-    ],
-    answer: 'Chế độ cộng sản nguyên thủy',
-  },
-  {
-    id: 4,
-    question:
-      'Sự kiện nào đánh dấu nền dân chủ XHCN chính thức được xác lập?',
-    options: [
-      'Công xã Paris 1871',
-      'Cách mạng Tháng Mười Nga 1917',
-      'Chiến tranh thế giới thứ hai',
-      'Cách mạng Tháng Tám 1945',
-    ],
-    answer: 'Cách mạng Tháng Mười Nga 1917',
-  },
-  {
-    id: 5,
-    question:
-      'Theo chủ nghĩa Mác - Lênin, có bao nhiêu hình thái (chế độ) nhà nước dân chủ trong lịch sử?',
-    options: ['2', '3', '4', '5'],
-    answer: '3',
-  },
-  {
-    id: 6,
-    question:
-      'Bản chất chính trị của nền dân chủ XHCN là sự lãnh đạo của giai cấp nào?',
-    options: [
-      'Giai cấp nông dân',
-      'Giai cấp tư sản',
-      'Tầng lớp trí thức',
-      'Giai cấp công nhân thông qua Đảng Cộng sản',
-    ],
-    answer: 'Giai cấp công nhân thông qua Đảng Cộng sản',
-  },
-  {
-    id: 7,
-    question:
-      'Bản chất kinh tế của nền dân chủ XHCN dựa trên chế độ nào?',
-    options: [
-      'Sở hữu tư nhân về tư liệu sản xuất',
-      'Sở hữu xã hội (công hữu) về tư liệu sản xuất chủ yếu',
-      'Kinh tế thị trường tự do tuyệt đối',
-      'Kinh tế tự cung tự cấp',
-    ],
-    answer: 'Sở hữu xã hội (công hữu) về tư liệu sản xuất chủ yếu',
-  },
-  {
-    id: 8,
-    question:
-      "Chủ tịch Hồ Chí Minh đã khẳng định: 'Nước ta là nước dân chủ, địa vị cao nhất là...'",
-    options: ['Cán bộ', 'Chính phủ', 'Dân', 'Nhà nước'],
-    answer: 'Dân',
-  },
-  {
-    id: 9,
-    question:
-      'Nguyên tắc tổ chức hệ thống chính trị ở Việt Nam hiện nay là gì?',
-    options: [
-      'Nhà nước lãnh đạo - Đảng quản lý - Nhân dân làm chủ',
-      'Đảng lãnh đạo - Nhà nước quản lý - Nhân dân làm chủ',
-      'Nhân dân lãnh đạo - Nhà nước quản lý',
-      'Đảng quản lý - Nhà nước điều hành',
-    ],
-    answer: 'Đảng lãnh đạo - Nhà nước quản lý - Nhân dân làm chủ',
-  },
-  {
-    id: 10,
-    question:
-      "Dân chủ đại diện, do nhân dân 'ủy quyền' cho tổ chức mà mình bầu ra, còn được gọi là gì?",
-    options: [
-      'Dân chủ trực tiếp',
-      'Dân chủ gián tiếp',
-      'Dân chủ tuyệt đối',
-      'Dân chủ tập trung',
-    ],
-    answer: 'Dân chủ gián tiếp',
-  },
-  {
-    id: 11,
-    question:
-      'Phương châm thực hiện dân chủ ở cơ sở tại Việt Nam là gì?',
-    options: [
-      'Dân biết, dân làm, dân kiểm tra',
-      'Dân bàn, dân làm, dân hưởng',
-      'Dân biết, dân bàn, dân làm, dân kiểm tra',
-      'Dân đóng góp, nhà nước thực hiện',
-    ],
-    answer: 'Dân biết, dân bàn, dân làm, dân kiểm tra',
-  },
-  {
-    id: 12,
-    question:
-      'Đâu là một trong những ưu điểm của việc thực hiện dân chủ cơ sở?',
-    options: [
-      'Còn mang tính hình thức',
-      'Tăng cường minh bạch, chống tham nhũng',
-      'Thông tin chưa rõ ràng',
-      'Phát sinh thủ tục hành chính',
-    ],
-    answer: 'Tăng cường minh bạch, chống tham nhũng',
-  },
-  {
-    id: 13,
-    question:
-      'Căn cứ vào phạm vi tác động, chức năng của nhà nước XHCN được chia thành:',
-    options: [
-      'Chức năng kinh tế và chính trị',
-      'Chức năng đối nội và đối ngoại',
-      'Chức năng trấn áp và xây dựng',
-      'Chức năng giai cấp và xã hội',
-    ],
-    answer: 'Chức năng đối nội và đối ngoại',
-  },
-  {
-    id: 14,
-    question:
-      'Trong hệ thống chính trị XHCN, thiết chế nào có chức năng trực tiếp nhất trong việc thể chế hóa yêu cầu dân chủ?',
-    options: ['Đảng Cộng sản', 'Nhà nước', 'Mặt trận Tổ quốc', 'Công đoàn'],
-    answer: 'Nhà nước',
-  },
-  {
-    id: 15,
-    question:
-      'Giải pháp nào sau đây giúp phát huy dân chủ cơ sở hiệu quả?',
-    options: [
-      'Giảm bớt các cuộc họp dân',
-      'Nâng cao trách nhiệm chính quyền trong việc minh bạch thông tin',
-      'Hạn chế sự tham gia của các tổ chức xã hội',
-      'Tập trung toàn bộ quyền lực cho cấp trên',
-    ],
-    answer:
-      'Nâng cao trách nhiệm chính quyền trong việc minh bạch thông tin',
-  },
+  { id: 1, question: "Thuật ngữ dân chủ (Demokratos) xuất phát từ tiếng nước nào?", options: ["La Mã cổ đại", "Hy Lạp cổ đại", "Pháp", "Anh"], answer: "Hy Lạp cổ đại", explanation: "Thuật ngữ dân chủ ra đời vào khoảng thế kỷ thứ VII – VI trước công nguyên ở Hy Lạp cổ đại." },
+  { id: 2, question: "Theo quan điểm của chủ nghĩa Mác - Lênin, dân chủ trước hết là:", options: ["Quyền lực thuộc về nhân dân", "Quyền lực của giai cấp thống trị", "Quyền tự do tuyệt đối", "Quyền lực của bộ máy nhà nước"], answer: "Quyền lực thuộc về nhân dân", explanation: "Về phương diện quyền lực, dân chủ là quyền lực thuộc về nhân dân, nhân dân là chủ nhân của nhà nước." },
+  { id: 3, question: "Hình thức manh nha của dân chủ xuất hiện trong chế độ nào?", options: ["Chế độ phong kiến", "Chế độ chủ nô", "Chế độ cộng sản nguyên thủy", "Chế độ tư bản"], answer: "Chế độ cộng sản nguyên thủy", explanation: "Trong chế độ cộng sản nguyên thủy đã xuất hiện hình thức manh nha của dân chủ mà Ph.Ăngghen gọi là \"dân chủ nguyên thủy\"." },
+  { id: 4, question: "Sự kiện nào đánh dấu nền dân chủ XHCN chính thức được xác lập?", options: ["Công xã Paris 1871", "Cách mạng Tháng Mười Nga 1917", "Chiến tranh thế giới thứ hai", "Cách mạng Tháng Tám 1945"], answer: "Cách mạng Tháng Mười Nga 1917", explanation: "Khi Cách mạng Tháng Mười Nga thành công (1917), nền dân chủ xã hội chủ nghĩa mới chính thức được xác lập." },
+  { id: 5, question: "Theo chủ nghĩa Mác - Lênin, có bao nhiêu hình thái (chế độ) nhà nước dân chủ trong lịch sử?", options: ["2", "3", "4", "5"], answer: "3", explanation: "Trong lịch sử nhân loại có ba nền dân chủ: chủ nô, tư sản và xã hội chủ nghĩa." },
+  { id: 6, question: "Bản chất chính trị của nền dân chủ XHCN là sự lãnh đạo của giai cấp nào?", options: ["Giai cấp nông dân", "Giai cấp tư sản", "Tầng lớp trí thức", "Giai cấp công nhân thông qua Đảng Cộng sản"], answer: "Giai cấp công nhân thông qua Đảng Cộng sản", explanation: "Bản chất chính trị của nền dân chủ XHCN là sự lãnh đạo chính trị của giai cấp công nhân thông qua đảng của nó đối với toàn xã hội." },
+  { id: 7, question: "Bản chất kinh tế của nền dân chủ XHCN dựa trên chế độ nào?", options: ["Sở hữu tư nhân về tư liệu sản xuất", "Sở hữu xã hội (công hữu) về tư liệu sản xuất chủ yếu", "Kinh tế thị trường tự do tuyệt đối", "Kinh tế tự cung tự cấp"], answer: "Sở hữu xã hội (công hữu) về tư liệu sản xuất chủ yếu", explanation: "Nền dân chủ xã hội chủ nghĩa dựa trên chế độ sở hữu xã hội về những tư liệu sản xuất chủ yếu." },
+  { id: 8, question: "Chủ tịch Hồ Chí Minh đã khẳng định: 'Nước ta là nước dân chủ, địa vị cao nhất là...'", options: ["Cán bộ", "Chính phủ", "Dân", "Nhà nước"], answer: "Dân", explanation: "Hồ Chí Minh khẳng định: Nước ta là nước dân chủ, địa vị cao nhất là dân, vì dân là chủ." },
+  { id: 9, question: "Nguyên tắc tổ chức hệ thống chính trị ở Việt Nam hiện nay là gì?", options: ["Nhà nước lãnh đạo - Đảng quản lý - Nhân dân làm chủ", "Đảng lãnh đạo - Nhà nước quản lý - Nhân dân làm chủ", "Nhân dân lãnh đạo - Nhà nước quản lý", "Đảng quản lý - Nhà nước điều hành"], answer: "Đảng lãnh đạo - Nhà nước quản lý - Nhân dân làm chủ", explanation: "Hệ thống chính trị tổ chức theo nguyên tắc Đảng lãnh đạo - Nhà nước quản lý - Nhân dân làm chủ." },
+  { id: 10, question: "Dân chủ đại diện, do nhân dân 'ủy quyền' cho tổ chức mà mình bầu ra, còn được gọi là gì?", options: ["Dân chủ trực tiếp", "Dân chủ gián tiếp", "Dân chủ tuyệt đối", "Dân chủ tập trung"], answer: "Dân chủ gián tiếp", explanation: "Hình thức dân chủ gián tiếp là hình thức dân chủ đại diện, được thực hiện do nhân dân \"ủy quyền\" cho tổ chức mà mình bầu ra." },
+  { id: 11, question: "Phương châm thực hiện dân chủ ở cơ sở tại Việt Nam là gì?", options: ["Dân biết, dân làm, dân kiểm tra", "Dân bàn, dân làm, dân hưởng", "Dân biết, dân bàn, dân làm, dân kiểm tra", "Dân đóng góp, nhà nước thực hiện"], answer: "Dân biết, dân bàn, dân làm, dân kiểm tra", explanation: "Quy chế dân chủ thực hiện theo phương châm \"dân biết, dân bàn, dân làm, dân kiểm tra\"." },
+  { id: 12, question: "Đâu là một trong những ưu điểm của việc thực hiện dân chủ cơ sở?", options: ["Còn mang tính hình thức", "Tăng cường minh bạch, chống tham nhũng", "Thông tin chưa rõ ràng", "Phát sinh thủ tục hành chính"], answer: "Tăng cường minh bạch, chống tham nhũng", explanation: "Thực hiện dân chủ cơ sở giúp mở rộng quyền làm chủ, tăng cường minh bạch, chống tham nhũng." },
+  { id: 13, question: "Căn cứ vào phạm vi tác động, chức năng của nhà nước XHCN được chia thành:", options: ["Chức năng kinh tế và chính trị", "Chức năng đối nội và đối ngoại", "Chức năng trấn áp và xây dựng", "Chức năng giai cấp và xã hội"], answer: "Chức năng đối nội và đối ngoại", explanation: "Căn cứ vào phạm vi tác động của quyền lực nhà nước, chức năng của nhà nước được chia thành chức năng đối nội và chức năng đối ngoại." },
+  { id: 14, question: "Trong hệ thống chính trị XHCN, thiết chế nào có chức năng trực tiếp nhất trong việc thể chế hóa yêu cầu dân chủ?", options: ["Đảng Cộng sản", "Nhà nước", "Mặt trận Tổ quốc", "Công đoàn"], answer: "Nhà nước", explanation: "Trong hệ thống chính trị xã hội chủ nghĩa, nhà nước là thiết chế có chức năng trực tiếp nhất trong việc thể chế hóa yêu cầu dân chủ." },
+  { id: 15, question: "Giải pháp nào sau đây giúp phát huy dân chủ cơ sở hiệu quả?", options: ["Giảm bớt các cuộc họp dân", "Nâng cao trách nhiệm chính quyền trong việc minh bạch thông tin", "Hạn chế sự tham gia của các tổ chức xã hội", "Tập trung toàn bộ quyền lực cho cấp trên"], answer: "Nâng cao trách nhiệm chính quyền trong việc minh bạch thông tin", explanation: "Nâng cao trách nhiệm chính quyền trong việc minh bạch thông tin và đối thoại là một trong những giải pháp trọng tâm." }
 ];
 
 function SiteNav({
@@ -1396,6 +1206,7 @@ function formatTime(totalSeconds: number) {
 }
 
 function QuizPage() {
+  const [isStarted, setIsStarted] = React.useState(false);
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [answers, setAnswers] = React.useState<(string | null)[]>(
     () => quizQuestions.map(() => null),
@@ -1407,15 +1218,13 @@ function QuizPage() {
   const [timeUsed, setTimeUsed] = React.useState<number | null>(null);
 
   React.useEffect(() => {
-    if (status !== 'inProgress') {
+    if (!isStarted || status !== 'inProgress') {
       return;
     }
 
     if (remainingSeconds <= 0) {
-      if (status === 'inProgress') {
-        setStatus('submitted');
-        setTimeUsed(900);
-      }
+      setStatus('submitted');
+      setTimeUsed(900);
       return;
     }
 
@@ -1432,9 +1241,103 @@ function QuizPage() {
     }, 1000);
 
     return () => window.clearInterval(id);
-  }, [remainingSeconds, status]);
+  }, [isStarted, remainingSeconds, status]);
 
   const currentQuestion = quizQuestions[currentIndex];
+
+  if (isStarted && status === 'inProgress' && !currentQuestion) {
+    return (
+      <section className="bg-zinc-950 text-zinc-50 min-h-screen flex items-center justify-center">
+        <div>Loading...</div>
+      </section>
+    );
+  }
+
+  const handleStartQuiz = () => {
+    setIsStarted(true);
+  };
+
+  if (!isStarted) {
+    return (
+      <section className="bg-zinc-950 text-zinc-50 min-h-screen">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14 md:py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-zinc-900/70 px-4 py-1 text-[0.7rem] text-amber-200">
+              <Gamepad2 className="h-3.5 w-3.5" />
+              <span>Trắc nghiệm ôn tập</span>
+            </div>
+
+            <div>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
+                Trắc nghiệm: Dân chủ &amp; dân chủ XHCN
+              </h1>
+              <p className="mt-2 max-w-2xl text-sm sm:text-base text-zinc-300/90 leading-relaxed">
+                15 câu hỏi nhằm củng cố kiến thức trọng tâm về nền dân chủ xã hội
+                chủ nghĩa, hệ thống chính trị và dân chủ cơ sở.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md p-6 sm:p-8 space-y-6">
+              <h2 className="text-lg font-semibold text-amber-200">
+                Vì sao nên làm bài?
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-3">
+                <div className="flex flex-col items-start gap-3 rounded-xl border border-zinc-800/50 bg-zinc-900/60 px-4 py-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/20 text-amber-300">
+                    <Target className="h-5 w-5" />
+                  </div>
+                  <p className="text-sm font-medium text-zinc-100">
+                    Tổng ôn trọng tâm
+                  </p>
+                  <p className="text-xs text-zinc-400">
+                    Củng cố kiến thức cốt lõi về dân chủ và dân chủ XHCN.
+                  </p>
+                </div>
+                <div className="flex flex-col items-start gap-3 rounded-xl border border-zinc-800/50 bg-zinc-900/60 px-4 py-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/20 text-amber-300">
+                    <BrainCircuit className="h-5 w-5" />
+                  </div>
+                  <p className="text-sm font-medium text-zinc-100">
+                    Phát hiện lỗ hổng
+                  </p>
+                  <p className="text-xs text-zinc-400">
+                    Xác định phần kiến thức cần ôn tập thêm.
+                  </p>
+                </div>
+                <div className="flex flex-col items-start gap-3 rounded-xl border border-zinc-800/50 bg-zinc-900/60 px-4 py-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/20 text-amber-300">
+                    <Timer className="h-5 w-5" />
+                  </div>
+                  <p className="text-sm font-medium text-zinc-100">
+                    Rèn áp lực thời gian
+                  </p>
+                  <p className="text-xs text-zinc-400">
+                    15 phút giới hạn giúp rèn luyện phản xạ và tập trung.
+                  </p>
+                </div>
+              </div>
+
+              <motion.button
+                type="button"
+                onClick={handleStartQuiz}
+                animate={{ scale: [1, 1.03, 1] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-amber-300 px-6 py-3 text-base font-semibold text-zinc-950 shadow-lg shadow-amber-300/30 hover:bg-amber-200 transition-colors"
+              >
+                <Gamepad2 className="mr-2 h-5 w-5" />
+                Bắt đầu làm bài
+              </motion.button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
 
   const handleAnswerChange = (value: string) => {
     if (status === 'submitted') return;
@@ -1459,14 +1362,9 @@ function QuizPage() {
     setTimeUsed(null);
   };
 
-  const score = React.useMemo(
-    () =>
-      quizQuestions.reduce((acc, q, index) => {
-        if (answers[index] === q.answer) return acc + 1;
-        return acc;
-      }, 0),
-    [answers],
-  );
+  const score = quizQuestions.reduce((acc, q, index) => {
+    return answers[index] === q.answer ? acc + 1 : acc;
+  }, 0);
 
   const answeredCount = answers.filter(Boolean).length;
 
@@ -1478,8 +1376,7 @@ function QuizPage() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14 md:py-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
@@ -1488,7 +1385,7 @@ function QuizPage() {
               <span>Kết quả trắc nghiệm ôn tập</span>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-[0_24px_80px_rgba(0,0,0,0.85)] p-6 sm:p-8 space-y-6">
+            <div className="overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md shadow-[0_24px_80px_rgba(0,0,0,0.85)] p-6 sm:p-8 space-y-6">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.22em] text-amber-300">
@@ -1524,24 +1421,51 @@ function QuizPage() {
                 </div>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100 flex gap-3">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0" />
-                  <p>
-                    Bạn đã trả lời{' '}
-                    <span className="font-semibold">{answeredCount}/15</span>{' '}
-                    câu hỏi. Hãy xem lại những câu chưa chắc chắn để củng cố
-                    kiến thức.
-                  </p>
-                </div>
+              <div className="space-y-6">
+                <h2 className="text-lg font-semibold text-amber-200">
+                  Chi tiết từng câu hỏi
+                </h2>
+                {quizQuestions.map((q, index) => {
+                  const userAnswer = answers[index] ?? 'Chưa trả lời';
+                  const isCorrect = userAnswer === q.answer;
 
-                <div className="rounded-xl border border-zinc-700/80 bg-zinc-900/80 px-4 py-3 text-sm text-zinc-200 flex gap-3">
-                  <ScrollText className="mt-0.5 h-4 w-4 flex-shrink-0" />
-                  <p>
-                    Bạn có thể làm lại bài trắc nghiệm để cải thiện kết quả, sử
-                    dụng kết hợp với phần trình bày lý thuyết ở trang chính.
-                  </p>
-                </div>
+                  return (
+                    <div
+                      key={q.id}
+                      className="rounded-xl border border-zinc-800/50 bg-zinc-900/60 p-4 sm:p-5 space-y-3"
+                    >
+                      <p className="text-sm font-medium text-zinc-100">
+                        Câu {q.id}: {q.question}
+                      </p>
+                      <p className="text-sm">
+                        <span className="text-zinc-400">Đáp án của bạn: </span>
+                        <span
+                          className={
+                            isCorrect
+                              ? 'text-emerald-400 font-medium'
+                              : 'text-red-400 font-medium'
+                          }
+                        >
+                          {userAnswer}
+                        </span>
+                      </p>
+                      {!isCorrect && (
+                        <p className="text-sm">
+                          <span className="text-zinc-400">Đáp án đúng: </span>
+                          <span className="text-emerald-400 font-medium">
+                            {q.answer}
+                          </span>
+                        </p>
+                      )}
+                      <div className="rounded-lg bg-zinc-800/60 p-3">
+                        <p className="text-xs text-zinc-400 mb-1">Giải thích:</p>
+                        <p className="text-sm text-zinc-200">
+                          {q.explanation ?? 'Không có giải thích.'}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
@@ -1592,7 +1516,7 @@ function QuizPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.6 }}
-            className="space-y-4 rounded-2xl border border-zinc-800 bg-zinc-900/80 p-4 sm:p-6 shadow-[0_20px_70px_rgba(0,0,0,0.85)]"
+            className="space-y-4 rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md p-4 sm:p-6 shadow-[0_20px_70px_rgba(0,0,0,0.85)]"
           >
             <div className="flex items-center justify-between gap-4 border-b border-zinc-800 pb-3">
               <div>
