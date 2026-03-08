@@ -125,7 +125,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 rounded-full border border-red-500/40 bg-red-900/30 px-4 py-1 text-xs sm:text-sm text-red-100 backdrop-blur"
+            className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-zinc-900/70 px-4 py-1 text-xs sm:text-sm text-amber-100 backdrop-blur shadow-[0_0_25px_rgba(250,204,21,0.35)]"
           >
             <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
             <span>Chuyên đề giáo dục chính trị</span>
@@ -138,7 +138,7 @@ function HeroSection() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="space-y-4"
           >
-            <h1 className="text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-red-100 drop-shadow-[0_0_25px_rgba(0,0,0,0.7)]">
+            <h1 className="text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-gradient-to-tr from-amber-200 via-rose-200 to-amber-400 text-transparent bg-clip-text drop-shadow-[0_0_30px_rgba(0,0,0,0.8)]">
               DÂN CHỦ VÀ DÂN CHỦ XÃ HỘI CHỦ NGHĨA
             </h1>
             <p className="text-pretty text-sm sm:text-base md:text-lg text-zinc-200/90 max-w-2xl mx-auto">
@@ -174,7 +174,7 @@ function Badge({
   return (
     <motion.div
       whileHover={{ y: -3, scale: 1.02 }}
-      className="inline-flex items-center gap-2 rounded-full border border-zinc-700/60 bg-zinc-900/70 px-3 py-1 backdrop-blur-sm"
+      className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-amber-400/10 px-3 py-1 text-amber-100/90 backdrop-blur-sm shadow-[0_0_20px_rgba(250,204,21,0.35)]"
     >
       <Icon className="h-3.5 w-3.5 text-amber-300" />
       <span>{label}</span>
@@ -234,10 +234,10 @@ function SectionWrapper({
       id={id}
       className="relative py-20 sm:py-24 md:py-28 lg:py-32 overflow-hidden"
     >
-      <div className="pointer-events-none absolute inset-0 opacity-[0.35]">
-        <div className="absolute inset-x-0 -top-40 h-64 bg-gradient-to-b from-red-900/20 via-transparent to-transparent" />
-        <div className="absolute inset-y-0 -left-40 w-64 bg-[radial-gradient(circle_at_top,_rgba(248,250,252,0.08),_transparent_60%)]" />
-        <div className="absolute inset-y-0 -right-40 w-64 bg-[radial-gradient(circle_at_bottom,_rgba(248,250,252,0.08),_transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.4]">
+        <div className="absolute inset-x-0 -top-40 h-64 bg-gradient-to-b from-red-900/40 via-transparent to-transparent" />
+        <div className="absolute inset-y-0 -left-40 w-64 bg-[radial-gradient(circle_at_top,_rgba(250,204,21,0.16),_transparent_60%)]" />
+        <div className="absolute inset-y-0 -right-40 w-64 bg-[radial-gradient(circle_at_bottom,_rgba(56,189,248,0.16),_transparent_60%)]" />
       </div>
 
       <div className={`relative z-10 mx-auto flex flex-col gap-10 px-4 sm:px-6 lg:px-8 ${contentMaxWidth}`}>
@@ -395,7 +395,7 @@ function TimelineCard({
     <motion.div
       whileHover={{ scale: 1.02, y: -4 }}
       transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-      className={`max-w-md rounded-xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md px-4 py-4 sm:px-5 sm:py-5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] ${
+      className={`max-w-md rounded-xl border border-red-500/40 bg-gradient-to-br from-zinc-900/90 via-zinc-900/80 to-red-950/70 backdrop-blur-md px-4 py-4 sm:px-5 sm:py-5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] ${
         align === 'left' ? 'sm:text-left' : 'sm:text-right'
       }`}
     >
@@ -488,7 +488,7 @@ function NatureSection() {
               stiffness: 220,
               damping: 20,
             }}
-            className="group relative overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md shadow-[0_24px_80px_rgba(0,0,0,0.85)]"
+            className="group relative overflow-hidden rounded-2xl border border-amber-400/50 bg-gradient-to-br from-zinc-900/90 via-zinc-900/80 to-amber-950/70 backdrop-blur-md shadow-[0_24px_80px_rgba(0,0,0,0.85)]"
           >
             <div className="pointer-events-none absolute inset-0 opacity-40">
               <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-amber-400/20 blur-3xl" />
@@ -754,13 +754,13 @@ function GrassrootsSection() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.4 }}
               whileHover={{ y: -6 }}
-              className="group relative overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900/80 backdrop-blur-md shadow-[0_20px_70px_rgba(0,0,0,0.8)] w-full h-full"
+              className="group relative overflow-hidden rounded-2xl border border-amber-400/40 bg-zinc-900/85 backdrop-blur-md shadow-[0_20px_70px_rgba(0,0,0,0.9)] w-full h-full"
             >
               <div className="relative w-full h-72 overflow-hidden">
                 <motion.div
                   className="h-full w-full bg-cover bg-center"
                   style={{ backgroundImage: `url('${item.image}')` }}
-                  whileHover={{ scale: 1.08 }}
+                  whileHover={{ scale: 1.08, rotate: -0.5 }}
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
@@ -805,13 +805,13 @@ function EvaluationSection() {
       label="Đánh giá và giải pháp"
       icon={AlertTriangle}
     >
-      <div className="grid gap-10 lg:grid-cols-2 items-start">
+      <div className="grid gap-8 lg:grid-cols-2 items-stretch">
         <motion.div
           variants={sectionContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="space-y-6"
+          className="space-y-6 rounded-3xl border border-zinc-800/60 bg-zinc-900/80 backdrop-blur-md p-6 sm:p-7 shadow-[0_18px_60px_rgba(0,0,0,0.8)] h-full"
         >
           <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
             Dân chủ xã hội chủ nghĩa đạt được nhiều kết quả quan trọng song vẫn
@@ -868,9 +868,9 @@ function EvaluationSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="space-y-6"
+          className="space-y-6 rounded-3xl border border-zinc-800/60 bg-zinc-900/80 backdrop-blur-md p-6 sm:p-7 shadow-[0_18px_60px_rgba(0,0,0,0.8)] h-full"
         >
-          <h3 className="text-xl sm:text-2xl font-semibold text-white">
+          <h3 className="text-xl sm:text-2xl font-semibold text-amber-200">
             Giải pháp từng bước
           </h3>
           <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
